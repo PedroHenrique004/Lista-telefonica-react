@@ -3,6 +3,8 @@ import Header from "./components/Titulo";
 import EstiloGlobal, { ContainerPagina, ContanainerContato } from "./styles";
 import CardRemover from "./components/CardRemover";
 import { useState } from "react";
+import { Provider } from "react-redux"; 
+import store from "./store";
 
 
 
@@ -18,7 +20,7 @@ function App() {
     }
 
     return (
-      <>
+      <Provider store={store}>
         <EstiloGlobal/>
         <ContainerPagina>
             <Header />
@@ -39,7 +41,7 @@ function App() {
             
             
         </ContainerPagina>
-      </>
+      </Provider>
     ) 
 }
 
