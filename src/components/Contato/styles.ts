@@ -56,3 +56,19 @@ export const BotaoSalvar = styled(Botao)`
     background-color: ${variavies.corBotaoSalvar};
     color: ${variavies.corDoTexto};
 `
+
+export const Input = styled.input`
+  background-color: transparent;
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid ${variavies.corDasBordas};
+  border-radius: 4px;
+`;
+
+export const BotaoContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+`;
