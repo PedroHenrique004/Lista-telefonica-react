@@ -3,12 +3,14 @@ import { RootState } from './Redux/store';
 import { useState } from 'react';
 import EstiloGlobal, { ContainerPagina, ContanainerContato } from './styles';
 import Contato, { ContatoType } from './components/Contato';
+import CardAdicionar from './components/CardAdicionar'; // Importe o CardAdicionar
 
 import Header from './components/Titulo';
 import CardRemover from './components/CardRemover';
 
 function App() {
     const [estaRemovendo, setEstaRemovendo] = useState(false)
+    const [estaAdicionando, setEstaAdicionando] = useState(false) // Adicione este estado
     const contatos = useSelector((state: RootState) => state.contatos.contatos);
     const dispatch = useDispatch();
     const [idDoContatoASerRemovido, setIdDoContatoASerRemovido] = useState<number | null>(null);
@@ -34,22 +36,35 @@ function App() {
       }
     }
 
+    function handleAdicionar(contato: ContatoType) {
+      dispatch({ type: 'ADD_CONTATO', payload: contato }); // Despache a ação ADD_CONTATO
+      setEstaAdicionando(false);
+    }
+
+    function handleAdicionarClick() {
+      setEstaAdicionando(true); // Defina estaAdicionando como true quando o botão Adicionar for clicado
+    }
+
     return (
         <>
         <EstiloGlobal />
             <ContainerPagina>
-                  <Header />
+                  <Header onAdicionarClick={handleAdicionarClick}/>
                   {estaRemovendo ? (
                     <CardRemover
                     cancelarRemover={funcaoCancelar}
                     remover={funcaoRemover} />
+                  ) : estaAdicionando ? ( // Adicione esta condição
+                    <CardAdicionar
+                      cancelarAdicionar={() => setEstaAdicionando(false)}
+                      adicionar={handleAdicionar} />
                   ) : (
                     <ContanainerContato>
                       {contatos.map(contato => (
                         <Contato
                           key={contato.id}
                           contato={contato}
-                          apagar={() => funcaoApagar(contato.id)} // Atualize esta linha
+                          apagar={() => funcaoApagar(contato.id)}
                           salvar={funcaoSalvar} />
                       ))}
                     </ContanainerContato>
@@ -59,4 +74,3 @@ function App() {
 }
 
 export default App;
-
