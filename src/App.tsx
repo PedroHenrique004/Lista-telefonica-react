@@ -11,9 +11,11 @@ function App() {
     const [estaRemovendo, setEstaRemovendo] = useState(false)
     const contatos = useSelector((state: RootState) => state.contatos.contatos);
     const dispatch = useDispatch();
+    const [idDoContatoASerRemovido, setIdDoContatoASerRemovido] = useState<number | null>(null);
 
-    function funcaoApagar(){
-      setEstaRemovendo(true)
+    function funcaoApagar(id: number){
+      setEstaRemovendo(true);
+      setIdDoContatoASerRemovido(id);
     }
 
     function funcaoCancelar(){
@@ -24,6 +26,14 @@ function App() {
       dispatch({ type: 'UPDATE_CONTATO', payload: contatoAtualizado });
     }
 
+    function funcaoRemover() {
+      if (idDoContatoASerRemovido !== null) {
+        dispatch({ type: 'REMOVE_CONTATO', payload: idDoContatoASerRemovido });
+        setIdDoContatoASerRemovido(null);
+        setEstaRemovendo(false);
+      }
+    }
+
     return (
         <>
         <EstiloGlobal />
@@ -31,14 +41,15 @@ function App() {
                   <Header />
                   {estaRemovendo ? (
                     <CardRemover
-                      cancelarRemover={funcaoCancelar} />
+                    cancelarRemover={funcaoCancelar}
+                    remover={funcaoRemover} />
                   ) : (
                     <ContanainerContato>
                       {contatos.map(contato => (
                         <Contato
                           key={contato.id}
                           contato={contato}
-                          apagar={funcaoApagar}
+                          apagar={() => funcaoApagar(contato.id)} // Atualize esta linha
                           salvar={funcaoSalvar} />
                       ))}
                     </ContanainerContato>

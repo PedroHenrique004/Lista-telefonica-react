@@ -16,7 +16,11 @@ type Contato = {
     ],
   };
   
-  type Action = { type: 'ADD_CONTATO'; payload: Contato } | { type: 'REMOVE_CONTATO'; payload: number };
+  type Action = 
+  | { type: 'ADD_CONTATO'; payload: Contato }
+  | { type: 'REMOVE_CONTATO'; payload: number }
+  | { type: 'UPDATE_CONTATO'; payload: Contato }
+
   
   export default function contatosReducer(state = initialState, action: Action): ContatosState {
     switch (action.type) {
@@ -24,6 +28,13 @@ type Contato = {
         return { ...state, contatos: [...state.contatos, action.payload] };
       case 'REMOVE_CONTATO':
         return { ...state, contatos: state.contatos.filter((contato) => contato.id !== action.payload) };
+      case 'UPDATE_CONTATO':
+        return {
+          ...state,
+          contatos: state.contatos.map((contato) =>
+            contato.id === action.payload.id ? action.payload : contato
+          ),
+        };
       default:
         return state;
     }

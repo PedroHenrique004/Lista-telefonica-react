@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as S from "./styles"
 
 export type ContatoType = {
@@ -20,6 +20,12 @@ const Contato = ({ contato, apagar, salvar }: Props) => {
   const [nome, setNome] = useState(contato.nome)
   const [telefone, setTelefone] = useState(contato.telefone)
   const [email, setEmail] = useState(contato.email)
+
+  useEffect(() => {
+    setNome(contato.nome);
+    setTelefone(contato.telefone);
+    setEmail(contato.email);
+  }, [contato]);
 
   function handleSalvar() {
     salvar({ ...contato, nome, telefone, email })
