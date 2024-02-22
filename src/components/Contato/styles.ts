@@ -22,6 +22,10 @@ export const ContanainerContato = styled.div`
         margin: 16px auto;
         padding-bottom: 16px;
     }
+
+    @media (max-width:768px) {
+        max-width: 92%;
+    }
 `
 
 export const SubTitulos = styled.p`
@@ -50,6 +54,11 @@ export const BotaoEditar = styled(Botao)`
 export const BotaoRemover = styled(Botao)`
     background-color: ${variavies.corBotaoRemover};
     color: ${variavies.corDoTexto};
+
+
+    @media (max-width: 768px) {
+        margin-left: 8px;
+    }
 `
 
 export const BotaoSalvar = styled(Botao)`
@@ -65,10 +74,39 @@ export const Input = styled.input`
   box-sizing: border-box;
   border: 1px solid ${variavies.corDasBordas};
   border-radius: 4px;
+
+  @media (max-width:768px) {
+        margin-top: 0;
+    }
 `;
 
 export const BotaoContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 16px;
+
+  
+  @media (max-width:768px) {
+        margin-top: 0px;
+
+        button {
+            margin: 6px auto;
+        }
+}
+`
+
+export const BotaoContainer2 = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+
+  
+  @media (max-width:768px) {
+        display: block;
+        margin-top: 0px;
+
+        button {
+            margin: 6px auto;
+        }
+}
 `;

@@ -27,10 +27,10 @@ const CardAdicionar = ({cancelarAdicionar, adicionar}: Props) => {
         <S.Input value={nome} onChange={e => setNome(e.target.value)} placeholder="Nome" />
         <S.Input value={telefone} onChange={e => setTelefone(e.target.value)} placeholder="Telefone" />
         <S.Input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" />
-        <S.BotaoContainer>
+        <S.BotaoContainer2>
           <S.BotaoSalvar onClick={handleAdicionar}>Adicionar</S.BotaoSalvar>
           <S.BotaoRemover onClick={cancelarAdicionar}>Cancelar</S.BotaoRemover>
-        </S.BotaoContainer>
+        </S.BotaoContainer2>
       </P.ContainerRemover>
     </P.Container>  
   )
